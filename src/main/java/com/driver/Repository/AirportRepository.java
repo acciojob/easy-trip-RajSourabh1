@@ -63,7 +63,7 @@ public class AirportRepository {
                 minTime = flight.getDuration();
             }
         }
-        if(minTime==0)
+        if(minTime==Integer.MAX_VALUE)
             return -1;
         else
             return minTime;
@@ -199,8 +199,10 @@ public class AirportRepository {
 
         //We need to get the starting airport from where the flight will be taking off
         //return null incase the flightId is invalid or you are not able to find the airportName
-        Flight flight = flightMap.get(flightId);
-        if(!airportMap.isEmpty()) {
+        if(!airportMap.isEmpty() && flightMap.containsKey(flightId)) {
+
+            Flight flight = flightMap.get(flightId);
+
             for (Airport airport : airportMap.values()) {
                 if (flight.getFromCity() == airport.getCity())
                     return airport.getAirportName();
