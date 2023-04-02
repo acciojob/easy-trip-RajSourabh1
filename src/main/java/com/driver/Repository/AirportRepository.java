@@ -171,7 +171,7 @@ public class AirportRepository {
         passengers.remove(passengerId);
         flightPassengersMap.put(flightId,passengers);
 
-        return null;
+        return "SUCCESS";
     }
 
 
@@ -226,6 +226,6 @@ public class AirportRepository {
     public String addPassenger(Passenger passenger){
         passengerMap.put(passenger.getPassengerId(),passenger);
         //Add a passenger to the database
-        return null;
+        return "SUCCESS";
     }
 }
