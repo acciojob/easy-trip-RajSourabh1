@@ -217,7 +217,7 @@ public class AirportRepository {
     //@GetMapping("/calculate-revenue-collected/{flightId}")
     public int calculateRevenueOfAFlight(Integer flightId){
 
-        //Calculate the total revenue that a flight could ha
+        //Calculate the total revenue that a flight could have
         int count = 0;
         count = flightFareMap.get(flightId);
         return count;
