@@ -130,7 +130,7 @@ public class AirportRepository {
         //return a String "FAILURE"
         //Also if the passenger has already booked a flight then also return "FAILURE".
         //else if you are able to book a ticket then return "SUCCESS"
-        if(flightMap.get(flightId).getMaxCapacity()<=flightPassengersMap.get(flightId).size())
+        if(flightPassengersMap.containsKey(flightId) && flightMap.get(flightId).getMaxCapacity()<=flightPassengersMap.get(flightId).size())
             return "FAILURE";
         if(flightPassengersMap.containsKey(flightId) && flightPassengersMap.get(flightId).contains(passengerId))
             return "FAILURE";
