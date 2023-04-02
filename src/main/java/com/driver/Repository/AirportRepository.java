@@ -34,33 +34,31 @@ public class AirportRepository {
         //Largest airport is in terms of terminals. 3 terminal airport is larger than 2 terminal airport
         //Incase of a tie return the Lexicographically smallest airportName
         int noOfTerminals = 0;
-        int count = 0;
         for(Airport airport:airportMap.values()){
             if(airport.getNoOfTerminals()>=noOfTerminals){
                 noOfTerminals=airport.getNoOfTerminals();
-                count++;
             }
         }
 
-        if(count==1){
+//        if(count==1){
+//            for(Airport airport:airportMap.values()){
+//                if(airport.getNoOfTerminals()==noOfTerminals){
+//                    return airport.getAirportName();
+//                }
+//            }
+//        }else {
+//            int i=0;
+//            String[] arr = new String[count];
+        String str = "";
             for(Airport airport:airportMap.values()){
                 if(airport.getNoOfTerminals()==noOfTerminals){
-                    return airport.getAirportName();
+                    str = str + airport.getAirportName() + ",";
                 }
             }
-        }else {
-            int i=0;
-            String[] arr = new String[count];
-            for(Airport airport:airportMap.values()){
-                if(airport.getNoOfTerminals()==noOfTerminals){
-                    arr[i]=airport.getAirportName();
-                    i++;
-                }
-            }
-            Arrays.sort(arr,String.CASE_INSENSITIVE_ORDER);
-            return arr[0];
-        }
-        return null;
+//            Arrays.sort(arr,String.CASE_INSENSITIVE_ORDER);
+        String[] s = str.split(",");
+        Arrays.sort(s,String.CASE_INSENSITIVE_ORDER);
+        return s[0];
     }
 
    // @GetMapping("/get-shortest-time-travel-between-cities")
@@ -134,7 +132,7 @@ public class AirportRepository {
         //else if you are able to book a ticket then return "SUCCESS"
         if(flightMap.get(flightId).getMaxCapacity()<=flightPassengersMap.get(flightId).size())
             return "FAILURE";
-        if(flightPassengersMap.get(flightId).contains(passengerId))
+        if(flightPassengersMap.containsKey(flightId) && flightPassengersMap.get(flightId).contains(passengerId))
             return "FAILURE";
 
         int fare = 0;
