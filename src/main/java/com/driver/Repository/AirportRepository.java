@@ -40,15 +40,6 @@ public class AirportRepository {
             }
         }
 
-//        if(count==1){
-//            for(Airport airport:airportMap.values()){
-//                if(airport.getNoOfTerminals()==noOfTerminals){
-//                    return airport.getAirportName();
-//                }
-//            }
-//        }else {
-//            int i=0;
-//            String[] arr = new String[count];
         String str = "";
             for(Airport airport:airportMap.values()){
                 if(airport.getNoOfTerminals()==noOfTerminals){
@@ -168,7 +159,7 @@ public class AirportRepository {
         if(!passengers.contains(passengerId))
             return "FAILURE";
 
-        int fare = 3000 + (passengers.size() * 50);
+        int fare = 3000 - (passengers.size() * 50);
         passengers.remove(passengerId);
         flightPassengersMap.put(flightId,passengers);
 
