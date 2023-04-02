@@ -75,24 +75,29 @@ public class AirportRepository {
 
         //Calculate the total number of people who have flights on that day on a particular airport
         //This includes both the people who have come for a flight and who have landed on an airport after their flight
-        List<Integer> l = new ArrayList<>();
-        for(Flight flight:flightMap.values()){
-            if(Objects.equals(flight.getFlightDate(), date)){
-                l.add(flight.getFlightId());
-            }
-        }
-        Airport airport = airportMap.get(airportName);
         int totalNoOfPeople = 0;
-        for(int i:l){
-            Flight flight = flightMap.get(i);
-            if(flight.getFromCity()==airport.getCity() || flight.getToCity()==airport.getCity()){
-                int flightId = flight.getFlightId();
-                int noOfPassenger = flightPassengersMap.get(flightId).size();
-                totalNoOfPeople += noOfPassenger;
-            }
-        }
 
-        return totalNoOfPeople;
+        if(flightMap.isEmpty())
+            return totalNoOfPeople;
+        else {
+            List<Integer> l = new ArrayList<>();
+            for (Flight flight : flightMap.values()) {
+                if (Objects.equals(flight.getFlightDate(), date)) {
+                    l.add(flight.getFlightId());
+                }
+            }
+            Airport airport = airportMap.get(airportName);
+
+            for (int i : l) {
+                Flight flight = flightMap.get(i);
+                if (flight.getFromCity() == airport.getCity() || flight.getToCity() == airport.getCity()) {
+                    int flightId = flight.getFlightId();
+                    int noOfPassenger = flightPassengersMap.get(flightId).size();
+                    totalNoOfPeople += noOfPassenger;
+                }
+            }
+            return totalNoOfPeople;
+        }
     }
 
    // @GetMapping("/calculate-fare")
