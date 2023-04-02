@@ -222,7 +222,7 @@ public class AirportRepository {
     }
 
 
-    //@PostMapping("/add-passenger")
+    //@PostMapping("/add-passenger")adac
     public String addPassenger(Passenger passenger){
         passengerMap.put(passenger.getPassengerId(),passenger);
         //Add a passenger to the database
