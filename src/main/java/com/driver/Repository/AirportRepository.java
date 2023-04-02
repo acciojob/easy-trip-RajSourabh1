@@ -168,8 +168,13 @@ public class AirportRepository {
         if(!passengers.contains(passengerId))
             return "FAILURE";
 
+        int fare = 3000 + (passengers.size() * 50);
         passengers.remove(passengerId);
         flightPassengersMap.put(flightId,passengers);
+
+        int revenue = flightFareMap.get(flightId);
+        revenue -= fare;
+        flightFareMap.put(flightId,revenue);
 
         return "SUCCESS";
     }
@@ -204,10 +209,13 @@ public class AirportRepository {
         //We need to get the starting airport from where the flight will be taking off
         //return null incase the flightId is invalid or you are not able to find the airportName
         Flight flight = flightMap.get(flightId);
-        for(Airport airport:airportMap.values()){
-            if(flight.getFromCity()==airport.getCity())
-                return airport.getAirportName();
-        }
+        if(!airportMap.isEmpty()) {
+            for (Airport airport : airportMap.values()) {
+                if (flight.getFromCity() == airport.getCity())
+                    return airport.getAirportName();
+            }
+        }else
+           return null;
         return null;
     }
 
